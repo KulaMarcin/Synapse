@@ -1,0 +1,198 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<!-- Required meta tags -->
+<link rel="icon" type="image/png" href="../img/bulb.png">
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+
+<link href="https://fonts.googleapis.com/css?family=Caveat&display=swap"
+	rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css?family=Allan&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+
+<title>Moje testy</title>
+
+</head>
+<body>
+
+	<div class="container home-container-style">
+
+		<div class="row">
+			<div class="col home-col">
+				<div class="jumbotron jumbotron-fluid">
+					<div class="container">
+						<form
+							th:action="@{/confirmAnswerActionTest(questionNumber=${questionNumber}, courseId=${courseId}, questionQuantity=${questionQuantity})}"
+							method="POST" th:object="${question}">
+
+							<input type="hidden" th:field="*{id}"> <input
+								type="hidden" th:field="*{answerA}"> <input
+								type="hidden" th:field="*{answerB}"> <input
+								type="hidden" th:field="*{answerC}"> <input
+								type="hidden" th:field="*{answerD}"> <input
+								type="hidden" th:field="*{correctAnswer}">
+
+							<p class="lead">
+
+								<img src="img/test-sm.png" /> Pytanie: <a th:text="${questionNumber+1}"> </a> / <a
+									th:text="${questionQuantity}"></a>
+							</p>
+							<br>
+							<br>
+							<h3>
+								<a th:if="${question.type=='text'}" th:text="${question.question}"></a>
+								<div class="question-image-div" th:if="${question.type=='video'}">
+									<a th:text="${question.question}"></a>
+									<br>
+									<br>
+									<iframe width="600" height="400"
+											th:src="${question.resource}">
+									</iframe>
+								</div>
+								<div class="question-image-div" th:if="${question.type=='image'}">
+									<a th:text="${question.question}"></a>
+									<br>
+									<br>
+									<img th:width="600px" th:height="400px" th:src="${question.resource}" />
+								</div>
+							</h3>
+							<br> <br>
+							<table class="table option-table-style">
+
+								<tbody>
+
+									<tr>
+
+										<td><input type="radio" th:field="*{selectedAnswer}"
+											th:value="${question.answerA}" /> <a class="read"
+											th:text="${question.answerA}"></a></td>
+
+										<td><input type="radio" th:field="*{selectedAnswer}"
+											th:value="${question.answerB}" /> <a class="read"
+											th:text="${question.answerB}"></a></td>
+
+										<td><input type="radio" th:field="*{selectedAnswer}"
+											th:value="${question.answerC}" /> <a class="read"
+											th:text="${question.answerC}"></a></td>
+
+										<td><input type="radio" th:field="*{selectedAnswer}"
+											th:value="${question.answerD}" /> <a class="read"
+											th:text="${question.answerD}"></a></td>
+
+									</tr>
+
+								</tbody>
+
+							</table>
+
+							<br> <br> <br>
+
+							<div class="confirm-answer-div">
+								Obecna odpowiedź: <span class="red" th:if="${currentSelectedAnswer=='BRAK'}" th:text="${currentSelectedAnswer}"></span> <span class="green" th:if="${currentSelectedAnswer!='BRAK'}" th:text="${currentSelectedAnswer}"></span>
+								<br> <br>
+
+								<button class="btn btn-secondary btn-sm" type="submit"><img src="img/confirmation-sm.png" /></button>
+							</div>
+
+
+						</form>
+
+
+						<br> <br> <br> <br>
+
+
+						<table class="table my-table">
+
+							<tbody>
+								<tr>
+									<td>
+										<div th:if="${questionNumber}>0">
+											<a
+												th:href="@{/previousQuestion(questionQuantity=${questionQuantity}, questionNumber=${questionNumber}, courseId=${courseId} )}"
+												class="btn btn-secondary btn-sm"> <img src="img/left-sm.png" /> </a>
+										</div>
+
+										<div th:if="${questionNumber}<=0">
+											<a
+												th:href="@{/previousQuestion(questionQuantity=${questionQuantity}, questionNumber=${questionNumber}, courseId=${courseId} )}"
+												class="btn btn-secondary btn-sm disabled"
+												aria-disabled="true"> <img src="img/left-sm.png" /> </a>
+										</div>
+
+									</td>
+
+									<td>
+										<div th:if="${questionNumber<questionQuantity-1}">
+											<a
+												th:href="@{/nextQuestion(questionQuantity=${questionQuantity}, questionNumber=${questionNumber}, courseId=${courseId} )}"
+												class="btn btn-secondary btn-sm"> <img src="img/right-sm.png" /> </a>
+										</div>
+										<div th:if="${questionNumber>=questionQuantity-1}">
+											<a
+												th:href="@{/nextQuestion(questionQuantity=${questionQuantity}, questionNumber=${questionNumber}, courseId=${courseId} )}"
+												class="btn btn-secondary btn-sm disabled"
+												aria-disabled="true"> <img src="img/right-sm.png" /> </a>
+										</div>
+									</td>
+
+									<td>
+										<div th:if="${questionNumber==questionQuantity-1}">
+											<a
+												th:href="@{/finishTheCourseAction(questionQuantity=${questionQuantity}, courseId=${courseId})}"
+												class="btn btn-secondary btn-sm"> <img src="img/finish-sm.png" /> </a>
+										</div>
+										<div th:if="${questionNumber!=questionQuantity-1}">
+											<a
+												th:href="@{/finishTheCourseAction(questionQuantity=${questionQuantity}, courseId=${courseId})}"
+												class="btn btn-secondary btn-sm disabled"
+												aria-disabled="true"> <img src="img/finish-sm.png" /> </a>
+										</div>
+									</td>
+								</tr>
+
+							</tbody>
+						</table>
+
+
+
+
+
+
+
+					</div>
+				</div>
+
+
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+
+</body>
+</html>

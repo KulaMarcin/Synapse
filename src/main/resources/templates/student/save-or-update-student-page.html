@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+<!-- Required meta tags -->
+<link rel="icon" type="image/png" href="../img/bulb.png">
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+
+<link href="https://fonts.googleapis.com/css?family=Caveat&display=swap"
+	rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css?family=Allan&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+
+<title>Uaktualnij studenta</title>
+
+</head>
+
+<body>
+
+	<div class="container home-container-style">
+
+		<div class="row">
+			<div class="col-12 menu-col-style">
+				<div sec:authorize="hasRole('ROLE_STUDENT')">
+					<nav class="home-nav navbar navbar-dark bg-dark navbar-expand-lg ">
+						<a class="navbar-brand home-menu-logo-style" th:href="@{/}">SYNAPSE</a><img src="img/bulb.png" />
+						<button class="navbar-toggler" type="button"
+							data-toggle="collapse" data-target="#navbarSupportedContent"
+							aria-controls="navbarSupportedContent" aria-expanded="false"
+							aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+
+						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+							<ul class="navbar-nav mr-auto">
+								<li class="nav-item active nav-link-style"><img
+									src="img/student-sm.png" /><a class="nav-link my-link current-link-selected menu-style"
+									th:href="@{/showStudentDetail}">STUDENT</a></li>
+
+								<li class="nav-item active nav-link-style"><img
+									src="img/teacher-sm.png" /><a class="nav-link my-link menu-style"
+									th:href="@{/showMyTeachers}">MOI NAUCZYCIELE</a></li>
+
+								<li class="nav-item active nav-link-style"><img
+									src="img/test-sm.png" /><a class="nav-link my-link menu-style"
+									th:href="@{/showMyTeacherCourses}">MOJE TESTY</a></li>
+
+								<li class="nav-item active nav-link-style"><img
+									src="img/score-sm.png" /><a class="nav-link my-link menu-style"
+									th:href="@{/showMyCoursesResults}">MOJE WYNIKI</a></li>
+
+								<li class="nav-item active nav-link-style"><img
+									src="img/logout.png" />
+									<form th:action="@{/logout}" method="POST">
+										<input type="submit"
+											class="nav-link my-link nav-link-style linkButton menu-style"
+											value="WYLOGUJ" />
+									</form></li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col home-col-title">
+			<img src="img/update-sm.png" />
+			Aktualizacja
+			</div>
+		</div>
+
+		<div class="row">
+
+			<div class="col home-col">
+				<form th:action="@{/saveOrUpdateStudent}" method="POST"
+					  th:object="${currentStudent}">
+					<div class="form-group">
+						<input type="hidden" class="form-control"
+							   th:field="*{id}" placeholder="id">
+						<br>
+						<br>
+						<table class="table table-style">
+							<thead class="">
+							<tr>
+								<th>Rola</th>
+								<th>Imię</th>
+								<th>Nazwisko</th>
+								<th>Email</th>
+								<th>Szkoła</th>
+								<th>Klasa</th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr>
+								<td> <br/>
+									<img data-toggle="tooltip" data-placement="top"
+										 title="Nauczyciel" src="img/teacher-pro-sm.png" /></td>
+								</td>
+								<td> <br/>
+									<input size="30"
+										   id="firstName" class="form-control" type="text"
+										   th:field="*{firstName}">
+								</td>
+								<td> <br/>
+									<input size="30"
+										   class="form-control" id="lastName" type="text"
+										   th:field="*{lastName}">
+								</td>
+								<td> <br/>
+									<input size="30"
+										   class="form-control" id="email" type="text"
+										   th:field="*{email}">
+								</td>
+								<td> <br/>
+									<input size="30"
+										   class="form-control" id="school" type="text"
+										   th:field="*{school}">
+								</td>
+								<td> <br/>
+									<select id="class" class="form-control" th:field="*{studentClass}">
+										<option th:value="'Klasa 1'" th:text="'Klasa 1'"></option>
+										<option th:value="'Klasa 2'" th:text="'Klasa 2'"></option>
+										<option th:value="'Klasa 3'" th:text="'Klasa 3'"></option>
+										<option th:value="'Klasa 4'" th:text="'Klasa 4'"></option>
+										<option th:value="'Klasa 5'" th:text="'Klasa 5'"></option>
+										<option th:value="'Klasa 6'" th:text="'Klasa 6'"></option>
+										<option th:value="'Klasa 7'" th:text="'Klasa 7'"></option>
+										<option th:value="'Klasa 8'" th:text="'Klasa 8'"></option>
+
+										<option th:value="'Liceum klasa 1'" th:text="'Liceum klasa 1'"></option>
+										<option th:value="'Liceum klasa 2'" th:text="'Liceum klasa 2'"></option>
+										<option th:value="'Liceum klasa 3'" th:text="'Liceum klasa 3'"></option>
+										<option th:value="'Liceum klasa 4'" th:text="'Liceum klasa 4'"></option>
+
+										<option th:value="'Technikum klasa 1'" th:text="'Technikum klasa 1'"></option>
+										<option th:value="'Technikum klasa 2'" th:text="'Technikum klasa 2'"></option>
+										<option th:value="'Technikum klasa 3'" th:text="'Technikum klasa 3'"></option>
+										<option th:value="'Technikum klasa 4'" th:text="'Technikum klasa 4'"></option>
+										<option th:value="'Technikum klasa 5'" th:text="'Technikum klasa 5'"></option>
+
+									</select>
+								</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+					<br>
+					<br>
+					<hr class="my-4">
+					<p class="font-italic font-weight-light">Sprawdź poprawność wprowadzonych danych. Jeżeli wszystko
+						się zgadza, kliknij w poniższy przycisk:</p>
+					<p class="lead"></p>
+					<br>
+					<button class="btn btn-secondary btn-md" type="submit">Zapisz</button>
+				</form>
+			</div>
+
+		</div>
+
+		<div class="row">
+
+			<div class="col home-col">
+				<div sec:authorize="hasRole('ROLE_STUDENT')">
+
+					<div class="jumbotron">
+						<h2>
+						<img src="img/student.png" />
+							<a th:text="${currentStudent.firstName}"></a> <a
+								th:text="${currentStudent.lastName}"></a>
+						</h2>
+						<p class="lead">
+						<form th:action="@{/saveOrUpdateStudent}" method="POST"
+							th:object="${currentStudent}">
+
+							<div class="form-group">
+								<br> <br> <input type="hidden" class="form-control"
+									th:field="*{id}" placeholder="id">
+
+								<div class="row">
+									<div class="col-4">
+										<label for="firstName">Imie: </label> <input size="30"
+											id="firstName" class="form-control" type="text"
+											th:field="*{firstName}"> <br>
+									</div>
+								
+									<div class="col-4 ">
+										<label for="lastName">Nazwisko: </label> <input size="30"
+											class="form-control" id="lastName" type="text"
+											th:field="*{lastName}"> <br>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-4">
+										<label for="email">Email: </label> <input size="30"
+											class="form-control" id="email" type="text"
+											th:field="*{email}"> <br>
+									</div>
+								
+									<div class="col-4">
+										<label for="school">Szkoła: </label> <input size="30"
+											class="form-control" id="school" type="text"
+											th:field="*{school}"> <br>
+									</div>
+								</div>
+								
+								<div class="row">
+									<div class="col-4">
+									<label for="class">Klasa: </label>
+								 <select id="class" class="form-control form-style" th:field="*{studentClass}">
+									<option th:value="'Klasa 1'" th:text="'Klasa 1'"></option>
+									<option th:value="'Klasa 2'" th:text="'Klasa 2'"></option>
+									<option th:value="'Klasa 3'" th:text="'Klasa 3'"></option>
+									<option th:value="'Klasa 4'" th:text="'Klasa 4'"></option>
+									<option th:value="'Klasa 5'" th:text="'Klasa 5'"></option>
+									<option th:value="'Klasa 6'" th:text="'Klasa 6'"></option>
+									<option th:value="'Klasa 7'" th:text="'Klasa 7'"></option>
+									<option th:value="'Klasa 8'" th:text="'Klasa 8'"></option>
+									
+									<option th:value="'Liceum klasa 1'" th:text="'Liceum klasa 1'"></option>
+									<option th:value="'Liceum klasa 2'" th:text="'Liceum klasa 2'"></option>
+									<option th:value="'Liceum klasa 3'" th:text="'Liceum klasa 3'"></option>
+									<option th:value="'Liceum klasa 4'" th:text="'Liceum klasa 4'"></option>
+									
+									<option th:value="'Technikum klasa 1'" th:text="'Technikum klasa 1'"></option>
+									<option th:value="'Technikum klasa 2'" th:text="'Technikum klasa 2'"></option>
+									<option th:value="'Technikum klasa 3'" th:text="'Technikum klasa 3'"></option>
+									<option th:value="'Technikum klasa 4'" th:text="'Technikum klasa 4'"></option>
+									<option th:value="'Technikum klasa 5'" th:text="'Technikum klasa 5'"></option>
+									
+								</select> 
+								
+								</div>
+								</div>
+								
+								<br> <br>
+								<hr class="my-4">
+								<p class="font-italic font-weight-light">Sprawdź poprawność wprowadzonych danych. Jeżeli wszystko
+									się zgadza, kliknij w poniższy przycisk:</p>
+								<p class="lead"></p>
+
+								<br>
+
+								<button class="btn btn-secondary btn-md" type="submit">Zapisz</button>
+
+							</div>
+						</form>
+
+
+					</div>
+
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

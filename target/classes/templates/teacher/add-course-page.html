@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+<!-- Required meta tags -->
+<link rel="icon" type="image/png" href="../img/bulb.png">
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+
+<link href="https://fonts.googleapis.com/css?family=Caveat&display=swap"
+	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Allan&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+
+<title>Dodaj kurs</title>
+
+</head>
+
+<body>
+
+
+	<div class="container home-container-style">
+
+		<div class="row">
+
+			<div class="col-12 menu-col-style">
+
+				<div sec:authorize="hasRole('ROLE_TEACHER')">
+					<nav
+						class="home-nav navbar navbar-dark bg-dark navbar-expand-lg nav-style">
+						<a class="navbar-brand home-menu-logo-style" th:href="@{/}">SYNAPSE</a> <img src="img/bulb.png" />
+						<button class="navbar-toggler" type="button"
+							data-toggle="collapse" data-target="#navbarSupportedContent"
+							aria-controls="navbarSupportedContent" aria-expanded="false"
+							aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+
+						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+							<ul class="navbar-nav mr-auto">
+								<li class="nav-item active nav-link-style"><img
+									src="img/teacher-sm.png" /><a class="nav-link my-link menu-style"
+									th:href="@{/showTeacherDetail}">NAUCZYCIEL</a></li>
+
+								<li class="nav-item active nav-link-style"><img
+									src="img/my-students-sm.png" /><a class="nav-link my-link menu-style"
+									th:href="@{/showMyStudents}">MOI UCZNIOWIE</a></li>
+
+								<li class="nav-item active nav-link-style"><img
+									src="img/student-sm.png" /><a class="nav-link my-link menu-style"
+									th:href="@{/showAllStudents}">WSZYSCY UCZNIOWIE</a></li>
+
+								<li class="nav-item active nav-link-style"><img
+									src="img/test-sm.png" /><a class="nav-link my-link menu-style"
+									th:href="@{/showTeacherCourses}">MOJE TESTY</a></li>
+
+								<li class="nav-item active nav-link-style"><img
+									src="img/new-test-sm.png" /><a class="nav-link my-link current-link-selected menu-style"
+									th:href="@{/showAddCoursePage}">NOWY TEST</a></li>
+
+								<li class="nav-item active nav-link-style"><img
+									src="img/logout.png" />
+									<form th:action="@{/logout}" method="POST">
+										<input type="submit" class="nav-link my-link nav-link-style linkButton menu-style" value="WYLOGUJ" />
+									</form></li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+
+			</div>
+
+		</div>
+
+
+		<div class="row">
+			<div class="col home-col-title">
+			<img src="img/new-test-sm.png" />
+			Dodaj nowy test
+			
+			</div>
+		</div>
+
+				<div class="row">
+					<div class="col home-col">
+						<form th:action="@{/addCourse}" method="POST"
+							  th:object="${course}">
+							<div class="form-group">
+								<input type="hidden" class="form-control" th:field="*{id}"
+									   placeholder="id">
+
+								<br>
+								<br>
+								<table class="table table-style">
+									<thead class="">
+									<tr>
+										<th>Rola</th>
+										<th>Tytuł testu</th>
+										<th>Opis testu</th>
+										<th>Przedmiot</th>
+										<th>Przeznaczony dla</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<td> <br/>
+											<img data-toggle="tooltip" data-placement="top"
+												 title="Nowy test" src="img/test-pro-sm.png" />
+										</td>
+										<td> <br/>
+											<input
+													size="30" class="form-control" type="text"
+													th:field="*{title}" placeholder="Tytuł testu">
+										</td>
+										<td> <br/>
+											<input
+													size="30" class="form-control"
+													type="text" placeholder="Opis" th:field="*{description}">
+										</td>
+										<td> <br/>
+											<input size="30"
+												    class="form-control" type="text"
+												   placeholder="Przedmiot" th:field="*{subject}">
+										</td>
+										<td> <br/>
+											<select class="form-control form-style" th:field="*{destinyFor}">
+												<option th:value="'Klasa 1'" th:text="'Klasa 1'"></option>
+												<option th:value="'Klasa 2'" th:text="'Klasa 2'"></option>
+												<option th:value="'Klasa 3'" th:text="'Klasa 3'"></option>
+												<option th:value="'Klasa 4'" th:text="'Klasa 4'"></option>
+												<option th:value="'Klasa 5'" th:text="'Klasa 5'"></option>
+												<option th:value="'Klasa 6'" th:text="'Klasa 6'"></option>
+												<option th:value="'Klasa 7'" th:text="'Klasa 7'"></option>
+												<option th:value="'Klasa 8'" th:text="'Klasa 8'"></option>
+
+												<option th:value="'Liceum klasa 1'" th:text="'Liceum klasa 1'"></option>
+												<option th:value="'Liceum klasa 2'" th:text="'Liceum klasa 2'"></option>
+												<option th:value="'Liceum klasa 3'" th:text="'Liceum klasa 3'"></option>
+												<option th:value="'Liceum klasa 4'" th:text="'Liceum klasa 4'"></option>
+
+												<option th:value="'Technikum klasa 1'" th:text="'Technikum klasa 1'"></option>
+												<option th:value="'Technikum klasa 2'" th:text="'Technikum klasa 2'"></option>
+												<option th:value="'Technikum klasa 3'" th:text="'Technikum klasa 3'"></option>
+												<option th:value="'Technikum klasa 4'" th:text="'Technikum klasa 4'"></option>
+												<option th:value="'Technikum klasa 5'" th:text="'Technikum klasa 5'"></option>
+
+											</select>
+										</td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+							<br>
+							<br>
+							<hr class="my-4">
+							<p class="font-italic font-weight-light">Sprawdź poprawność wprowadzonych danych. Jeżeli wszystko
+								się zgadza, kliknij w poniższy przycisk:</p>
+							<p class="lead"></p>
+							<br>
+							<button class="btn btn-secondary btn-md" type="submit">Zapisz</button>
+						</form>
+					</div>
+
+				</div>
+		</div>
+
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+
+</body>
+</html>

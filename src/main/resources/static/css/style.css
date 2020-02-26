@@ -1,0 +1,274 @@
+
+body {
+    background: url(../img/background-image.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font-family: 'Roboto', sans-serif;
+
+}
+
+.login-column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #323a45;
+}
+
+.register-column {
+    display: flex;
+    justify-content: center;
+    padding-top: 160px;
+    height: 100vh;
+    background-color: #323a45;
+}
+
+.login-content {
+   text-align: center;
+   width: 340px;
+   height: 240px; 
+}
+
+.background-column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+    font-family: 'Caveat', cursive;
+    font-size: 50px;
+}
+
+.login-name-style {
+    font-family: 'Caveat', cursive;
+    font-size: 35px;
+    color: white;
+}
+
+.home-container-style{
+	background-color: white;
+	min-height: 100vh;
+	padding: 0px;
+	border-radius: 8px
+}
+
+.home-menu-logo-style {
+	font-family: 'Caveat', cursive;
+	font-size: 40px;
+}
+
+.my-link:hover {
+	
+	border-bottom: solid 2px white;
+	
+}
+
+.home-col {
+	padding: 60px;
+}
+
+.home-col-danger-message {
+	padding-top: 60px;
+	padding-left: 60px;
+	padding-right: 60px;
+}
+
+.home-col-padding-bottom-sm {
+	padding-left: 60px;
+	padding-right: 60px;
+	padding-top: 60px;
+}
+
+.menu-col-style{
+	
+}
+
+.logout-style{
+	background-color: #343a40;
+	color: white;
+	padding-top:10px;
+	text-align: center;
+}
+
+.test {
+	margin-bottom: 10px;
+}
+
+.jumbotron-style {
+	height: 210px;
+	padding: 20px;
+}
+
+.home-col-for-add-course-button{
+	padding-left: 60px;
+	padding-top: 30px;
+}
+
+.my-table{
+	width:300px;
+	height:100px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.option-table-style {
+	font-size: 20px;
+	text-align: center;
+}
+
+.confirm-answer-div {
+	margin-left: auto;
+	margin-right: auto;
+	width:200px;
+	height: 100px;
+	text-align: center;
+}
+
+.home-col-title{
+	margin-left: 50px;
+	margin-top: 30px;
+	font-size: 30px;
+}
+
+.form-style {
+	width: 230px;
+}
+
+.nav-link-style {
+	text-align: center;
+	margin-top:15px;
+	width:150px;
+}
+
+.nav-style{ 
+	text-align: center; 
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+}
+
+.linkButton { 
+     background: none;
+     border: none;
+     color: white;
+     cursor: pointer; 
+     margin-top: 0px;
+}
+
+.linkButton:hover {
+	border-bottom: solid 2px white;
+}
+
+.current-link-selected{
+	border-bottom: solid 2px white;
+}
+
+.menu-style {
+	font-family: 'Allan', cursive;
+	font-size: 18px;
+}
+
+.test-page-style{
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	background-color: red;
+}
+
+.test {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.card-image-style {
+	margin-top: auto;
+	margin-bottom: auto;
+	margin-left: 40px;
+	
+}
+
+.card-text-style{
+	text-align: center;
+}
+
+.test-card-style{
+	padding-left: 20px;
+}
+
+.row-center{
+	padding-left: 100px;
+	padding-right: auto;
+}
+
+.my-col-style {
+	background-color: red;
+}
+
+.add-question-jumbotron-style {
+	
+	padding-left: auto;
+	padding-right: auto;
+}
+
+.add-question-col-style{
+	margin-right: 15px;
+}
+
+.add-course-jumbotron-style {
+}
+
+.table-style{
+	text-align: center;
+}
+
+.search-button {
+	background-color: white;
+}
+
+.search-button{
+	height: 40px;
+}
+
+.search-button:hover {
+	background-color: #a8a7a7;
+}
+
+.search-label-style{
+	margin-bottom: 20px;
+}
+
+.select-to-search-style{
+	width:200px;
+}
+
+.btn-in-table:hover{
+	background-color: #a8a7a7;
+}
+
+.red{
+	color: red;
+}
+
+.green{
+	color: green;
+}
+
+.question-image-div{
+	width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+input[type=radio] {
+	border: 0px;
+	width: 15%;
+	height: 0.8em;
+}
+
+.home-col-title-for-add-button{
+
+	margin-left: 88.5%;
+	padding-right: auto;
+	padding-left: auto;
+}

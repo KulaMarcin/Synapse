@@ -1,0 +1,198 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+<!-- Required meta tags -->
+<link rel="icon" type="image/png" href="../img/bulb.png">
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+
+<link href="https://fonts.googleapis.com/css?family=Caveat&display=swap"
+	rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css?family=Allan&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+
+<title>Moje wyniki</title>
+
+</head>
+<body>
+
+
+	<div class="container home-container-style">
+		<div class="row">
+
+			<div class="col-12 menu-col-style">
+				<div sec:authorize="hasRole('ROLE_STUDENT')">
+					<nav class="home-nav navbar navbar-dark bg-dark navbar-expand-lg ">
+						<a class="navbar-brand home-menu-logo-style" th:href="@{/}">SYNAPSE</a><img src="img/bulb.png" />
+						<button class="navbar-toggler" type="button"
+							data-toggle="collapse" data-target="#navbarSupportedContent"
+							aria-controls="navbarSupportedContent" aria-expanded="false"
+							aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+
+						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+							<ul class="navbar-nav mr-auto">
+								<li class="nav-item active nav-link-style"><img
+									src="img/student-sm.png" /><a class="nav-link my-link menu-style"
+									th:href="@{/showStudentDetail}">STUDENT</a></li>
+
+								<li class="nav-item active nav-link-style"><img
+									src="img/teacher-sm.png" /><a class="nav-link my-link menu-style"
+									th:href="@{/showMyTeachers}">MOI NAUCZYCIELE</a></li>
+
+								<li class="nav-item active nav-link-style"><img
+									src="img/test-sm.png" /><a class="nav-link my-link menu-style"
+									th:href="@{/showMyTeacherCourses}">MOJE TESTY</a></li>
+
+								<li class="nav-item active nav-link-style"><img
+									src="img/score-sm.png" /><a class="nav-link my-link current-link-selected menu-style"
+									th:href="@{/showMyCoursesResults}">MOJE WYNIKI</a></li>
+
+								<li class="nav-item active nav-link-style"><img
+									src="img/logout.png" />
+									<form th:action="@{/logout}" method="POST">
+										<input type="submit"
+											class="nav-link my-link nav-link-style linkButton menu-style"
+											value="WYLOGUJ" />
+									</form></li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col home-col-title">
+			<img src="img/score-sm.png" />
+			Moje wyniki
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-4 home-col">
+				<form th:action="@{/searchTestsScoresByTeacherLastName}" class="form-inline">
+					<input id="lastNameToSearch" class="form-control" type="search" name="teacherLastName"
+						   placeholder="Wyszukaj po nazwisku" />
+					<button class="btn search-button" type="submit">
+						<img src="img/search-sm.png" />
+					</button>
+				</form>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col home-col">
+				<table class="table table-striped table-style">
+					<thead class="">
+						<tr>
+							<th>Typ</th>
+							<th>Test</th>
+							<th>Nauczyciel</th>
+							<th>Ocena</th>
+							<th>Wynik punktowy</th>
+							<th>Wynik procentowy</th>
+							<th>Data</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="result : ${coursesResultsForCurrentUser}">
+							<td><img data-toggle="tooltip" data-placement="top" title="Wynik testu" src="img/score-pro-sm.png" /></td>
+							<td th:text="${result.courseName}" />
+							<td>
+								<a th:text="${result.instructorFirstName}"></a> <a th:text="${result.instructorLastName}"></a>
+							</td>
+							<td th:text="${result.mark}" />
+							<td><span th:text="${result.score}"> </span> / <span
+								th:text="${result.maxScore}"> </span></td>
+							<td th:text="${result.procentageResult}" />
+							<td th:text="${result.testCompletionDate}" />
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col home-col-title">
+				<img src="img/score-sm.png" />
+				Wykres wyników:
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col home-col">
+				<div id="chart">
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+	<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script
+			src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<script th:inline="javascript">
+		$(function(){
+			Highcharts.chart('chart', {
+				chart: {
+					type: 'column'
+				},
+				title: {
+					text: ''
+				},
+
+				xAxis: {
+					categories: [[${testsScoresSeriesForTheChart.keySet()}]],
+					crosshair: true
+				},
+				yAxis: {
+					min: 0,
+					max: 6,
+					title: {
+						text: ''
+					}
+				},
+				tooltip: {
+					headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+					pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+							'<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+					footerFormat: '</table>',
+					shared: true,
+					useHTML: true
+				},
+				plotOptions: {
+					column: {
+						pointPadding: 0.2,
+						borderWidth: 0
+					}
+				},
+				series: [{
+					name: 'Ocena z testu',
+					data: [[${testsScoresSeriesForTheChart.values()}]]
+				}]
+			});
+		});
+	</script>
+
+</body>
+</html>

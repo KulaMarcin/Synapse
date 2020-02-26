@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<!-- Required meta tags -->
+<link rel="icon" type="image/png" href="../img/bulb.png">
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+
+<link href="https://fonts.googleapis.com/css?family=Caveat&display=swap"
+	rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css?family=Allan&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+
+<title>Moje testy</title>
+
+</head>
+<body>
+
+
+	<div class="container home-container-style">
+
+		<div class="row">
+
+			<div class="col-12 menu-col-style">
+				<div sec:authorize="hasRole('ROLE_STUDENT')">
+					<nav class="home-nav navbar navbar-dark bg-dark navbar-expand-lg ">
+						<a class="navbar-brand home-menu-logo-style" th:href="@{/}">SYNAPSE</a>
+						<img src="img/bulb.png" />
+						<button class="navbar-toggler" type="button"
+							data-toggle="collapse" data-target="#navbarSupportedContent"
+							aria-controls="navbarSupportedContent" aria-expanded="false"
+							aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+
+						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+							<ul class="navbar-nav mr-auto">
+								<li class="nav-item active nav-link-style"><img
+									src="img/student-sm.png" /><a class="nav-link my-link current-link-selected menu-style"
+									th:href="@{/showStudentDetail}">STUDENT</a></li>
+
+								<li class="nav-item active nav-link-style"><img
+									src="img/teacher-sm.png" /><a class="nav-link my-link menu-style"
+									th:href="@{/showMyTeachers}">MOI NAUCZYCIELE</a></li>
+
+								<li class="nav-item active nav-link-style"><img
+									src="img/test-sm.png" /><a class="nav-link my-link menu-style"
+									th:href="@{/showMyTeacherCourses}">MOJE TESTY</a></li>
+
+								<li class="nav-item active nav-link-style"><img
+									src="img/score-sm.png" /><a class="nav-link my-link menu-style"
+									th:href="@{/showMyCoursesResults}">MOJE WYNIKI</a></li>
+
+								<li class="nav-item active nav-link-style"><img
+									src="img/logout.png" />
+									<form th:action="@{/logout}" method="POST">
+										<input type="submit"
+											class="nav-link my-link nav-link-style linkButton menu-style"
+											value="WYLOGUJ" />
+									</form></li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col home-col-title">
+				<img src="img/score-sm.png" />
+				Wynik testu:
+			</div>
+		</div>
+
+		<br>
+		<br>
+
+		<div class="row">
+			<div class="col home-col">
+
+				<table class="table table-striped table-style">
+					<thead class="">
+					<tr>
+						<th>Wynik</th>
+						<th>Ocena</th>
+						<th>Wynik punktowy</th>
+						<th>Wynik procentowy</th>
+						<th>Data</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td> <img src="img/score-pro-sm.png" /> </td>
+						<td th:text="${currentCourseScore.mark}" />
+						<td>
+							<span th:text="${currentCourseScore.score}"> </span> / <span
+								th:text="${currentCourseScore.maxCourseScore}"> </span>
+						</td>
+						<td th:text="${currentCourseScore.procentageScore}" />
+						<td th:text="${currentCourseScore.testCompletionDate}" />
+					</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</body>
+</html>
+
