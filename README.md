@@ -1,4 +1,4 @@
-# Synapse
+# Synapse ![](github-img/teacher-sm.png)
 
 <br>
 <br>
