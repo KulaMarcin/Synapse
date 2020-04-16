@@ -23,6 +23,11 @@ import kula.marcin.synapse.demo.service.CourseScoreService;
 import kula.marcin.synapse.demo.service.TeacherService;
 import kula.marcin.synapse.demo.service.UserService;
 
+/*
+* TODO:
+*  method showMyTeacherCourses() should be rewrite
+* */
+
 @Controller
 public class ShowPageForStudentController {
 
