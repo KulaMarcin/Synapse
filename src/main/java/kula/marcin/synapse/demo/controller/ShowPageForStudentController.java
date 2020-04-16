@@ -26,6 +26,7 @@ import kula.marcin.synapse.demo.service.UserService;
 /*
 * TODO:
 *  method showMyTeacherCourses() should be rewrite
+*  field injection should be replace to constructor injection
 * */
 
 @Controller
