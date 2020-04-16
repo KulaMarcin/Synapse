@@ -20,6 +20,13 @@ import kula.marcin.synapse.demo.service.TeacherService;
 import kula.marcin.synapse.demo.service.StudentService;
 import kula.marcin.synapse.demo.service.UserService;
 
+/*
+* TODO:
+*  method searchTestsByTeacherLastName() should be rewrite
+*  field injection should be replace to constructor injection
+*  some business logic should be moved to @Service
+* */
+
 @Controller
 public class ActionForStudentController {
 
@@ -133,16 +140,11 @@ public class ActionForStudentController {
 		return "student/current-student-courses-results-page";
 	}
 
-
-	//  DO ZMIANY
-
 	@GetMapping("/searchTestsByTeacherLastName")
 	public String searchTestsByTeacherLastName(@RequestParam("teacherLastName") String teacherLastName, Model model){
 
 		int currentStudentId = this.getCurrentStudent().getId();
 		List<CourseScore> scores = courseScoreService.findByStudentId(currentStudentId);
-
-		//System.out.println(scores);
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String loggedUserName = authentication.getName();
