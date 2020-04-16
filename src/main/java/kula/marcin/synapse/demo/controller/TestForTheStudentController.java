@@ -26,6 +26,11 @@ import kula.marcin.synapse.demo.service.TestService;
 import kula.marcin.synapse.demo.service.StudentService;
 import kula.marcin.synapse.demo.service.UserService;
 
+/*
+* TODO:
+*  some business logic should be moved to @Service
+* */
+
 @Controller
 public class TestForTheStudentController implements Serializable {
 
