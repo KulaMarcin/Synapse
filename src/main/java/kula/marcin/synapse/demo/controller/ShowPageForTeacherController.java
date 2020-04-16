@@ -24,6 +24,12 @@ import kula.marcin.synapse.demo.service.StudentService;
 import kula.marcin.synapse.demo.service.QuestionService;
 import kula.marcin.synapse.demo.service.UserService;
 
+/*
+* TODO:
+*  method showStudentMarkPage() should be rewrite
+*  field injection should be replace to constructor injection
+* */
+
 @Controller
 public class ShowPageForTeacherController {
 
