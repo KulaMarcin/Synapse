@@ -25,6 +25,12 @@ import kula.marcin.synapse.demo.service.StudentService;
 import kula.marcin.synapse.demo.service.QuestionService;
 import kula.marcin.synapse.demo.service.UserService;
 
+/*
+* TODO:
+*  field injection should be replace to constructor injection
+*  some business logic should be moved to @Service
+* */
+
 @Controller
 public class ActionForTeacherController {
 
